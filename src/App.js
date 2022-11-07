@@ -1,25 +1,38 @@
-import logo from './logo.svg';
+import { Component } from 'react';
 import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+
+
+class App extends Component{
+
+  state={
+    person:null   
+  }
+
+  async componentDidMount(){
+    const url= "https://api.randomuser.me/";
+    const response= await fetch(url);
+    const data= await response.json();
+    this.setState({person: data.results[0]})
+    console.log(data.results[0])
+  }
+  render(){
+    return(
+      <div>
+        {!this.state.person ? <p>Loading...</p> :      
+        <div className='App'>
+          <p>First name: {this.state.person.name.first} </p>
+          <p>Last name: {this.state.person.name.last}</p>
+          <p>Email: {this.state.person.email}</p>
+          <img src={this.state.person.picture.large} alt= "foto" width="150px"/> 
+        </div>
+        }
+      
+
+      </div>
+    )
+  }
 }
 
 export default App;
