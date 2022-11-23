@@ -1,1 +1,1 @@
-# App fetching data from Random user API. Made with React, React hooks, JSX. 
+# App fetching data from Random user API. Made with React, JSX. 
